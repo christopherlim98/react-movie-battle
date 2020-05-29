@@ -76,7 +76,7 @@ export function addOMDBratings(movies){
 
 
 function getOMDBMovie(title) {
-  return fetch(`http://omdbapi.com/?apikey=${omdb_key}&t=${title}`)
+  return fetch(`https://omdbapi.com/?apikey=${omdb_key}&t=${title}`)
     .then((res) => res.json())
     .then((movie) => {
       return movie.Ratings
