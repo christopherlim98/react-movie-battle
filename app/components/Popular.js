@@ -74,14 +74,21 @@ function PageNav( {selected, onUpdatePage}){
   )
 }
 
+function getReview(omdb){
+  console.log(omdb)
+  if (!omdb){
+    return undefined
+  }
+  return omdb.find((review) => review['Source'] == "Internet Movie Database")|| omdb.find((review) => review['Source'] == "Rotten Tomatoes")
+
+}
 
 function GenreGrid ({movies, children}){
   return (
     <ul className = 'grid space-around'>
       {movies.map((movie) => {
-        const { id, title, poster_path, release_date, vote_average, vote_count, tmdb} = movie
-        console.log('movie', movie)
-        console.log('tmdb', tmdb)
+        const { id, title, poster_path, release_date, vote_average, vote_count, omdb} = movie
+        const review = getReview(omdb) ? getReview(omdb)['Value'].slice(0,3) : 'CMI'
         return(
             <li
               className = 'card'
@@ -103,8 +110,10 @@ function GenreGrid ({movies, children}){
                       </Badge>
                     </Button>
                     <Button variant="success" className = 'ratings'>
-                      Rotten
-                      <Badge variant="light" className = 'badge'> {`  ${vote_average}   `}
+                      IMDB
+                      <Badge variant="light" className = 'badge'>
+
+                        {`  ${review}   `}
                       </Badge>
                     </Button>
                   </li>
@@ -148,6 +157,7 @@ export default class Popular extends React.Component {
       getMoviesByGenre(selectedGenre, this.state.selectedPage)
         .then ((data) => addOMDBratings(data))
         .then ((data) => {
+          console.log('screams!', data)
           this.setState(({movies}) => ({
             movies: {
               ...movies,

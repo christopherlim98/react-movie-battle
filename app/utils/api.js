@@ -10,7 +10,6 @@ function getGenres (){
     })
 }
 
-// returns [{ name: 'Romance', id: 10749}]
 function getGenre (genreName){
   return getGenres()
     .then((genres) => genres.filter(
@@ -22,7 +21,7 @@ function getGenre (genreName){
 }
 
 export async function getMoviesByGenre (genreName, pageNo){
-  var genreID = null
+  let genreID
   const toreturn = {}
 
   if (genreName == 'All'){
@@ -30,8 +29,6 @@ export async function getMoviesByGenre (genreName, pageNo){
         .then((res) => res.json())
         .then((movies) => {
           return movies.results
-
-
         })
   }else{
   await getGenre(genreName)
@@ -64,14 +61,19 @@ export function getMovie (title) {
 }
 
 export function addOMDBratings(movies){
-  const toreturn = movies.map((movie) => {
-    const container = movie
-    getOMDBMovie(movie.title)
-      .then((ratings) => container['tmdb'] = ratings)
-    return container
-  })
-  return toreturn
+
+  return Promise.all(
+    movies.map(async (movie) => {
+      console.log('here!', movie)
+      return await getOMDBMovie(movie.title)
+        .then((ratings) => {
+          movie['omdb'] = ratings
+          return movie
+        })
+    })
+  )
 }
+
 
 function getOMDBMovie(title) {
   return fetch(`http://omdbapi.com/?apikey=${omdb_key}&t=${title}`)
