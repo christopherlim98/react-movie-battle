@@ -75,7 +75,6 @@ function PageNav( {selected, onUpdatePage}){
 }
 
 function getReview(omdb){
-  console.log(omdb)
   if (!omdb){
     return undefined
   }
@@ -87,13 +86,13 @@ function GenreGrid ({movies, children}){
   return (
     <ul className = 'grid space-around'>
       {movies.map((movie) => {
-        const { id, title, poster_path, release_date, vote_average, vote_count, omdb} = movie
+        const { id, title, poster_path, release_date, vote_average, vote_count, omdb, imdbID} = movie
         const review = getReview(omdb) ? getReview(omdb)['Value'].slice(0,3) : 'CMI'
         return(
             <li
               className = 'card'
               key = {id}>
-              <a href =  {`https://www.themoviedb.org/movie/${id}`}>
+              <a href =  {`https://www.themoviedb.org/movie/${id}`} target="_blank" >
                 <img
                   className = 'poster'
                   src = {`https://image.tmdb.org/t/p/w500/${poster_path}`}
@@ -104,18 +103,22 @@ function GenreGrid ({movies, children}){
 
                 <div className = 'flex-center ratings'>
                   <li>
-                    <Button variant="dark" className = 'ratings'>
-                      TMDB
-                      <Badge variant="light" className = 'badge'> {`  ${vote_average}   `}
-                      </Badge>
-                    </Button>
-                    <Button variant="success" className = 'ratings'>
-                      IMDB
-                      <Badge variant="light" className = 'badge'>
+                    <a href =  {`https://www.themoviedb.org/movie/${id}`} target="_blank" >
+                      <Button variant="dark" className = 'ratings'>
+                        TMDB
+                        <Badge variant="light" className = 'badge'> {`  ${vote_average}   `}
+                        </Badge>
+                      </Button>
+                    </a>
+                    <a href = {`https://imdb.com/title/${imdbID}`} target="_blank" >
+                      <Button variant="success" className = 'ratings'>
+                        IMDB
+                        <Badge variant="light" className = 'badge'>
 
-                        {`  ${review}   `}
-                      </Badge>
+                          {`  ${review}   `}
+                        </Badge>
                     </Button>
+                    </a>
                   </li>
                 </div>
 

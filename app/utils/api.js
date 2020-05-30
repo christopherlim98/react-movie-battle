@@ -1,5 +1,6 @@
 const imdb_key = "k_gJ2dA127"
 const omdb_key = "2e9c7195"
+const omdb_key2 = "2c08432a"
 const tmdb_key = "32c3e11482c274e139254ddaa1dcadd8"
 
 function getGenres (){
@@ -41,7 +42,6 @@ export async function getMoviesByGenre (genreName, pageNo){
     .then((res) => res.json())
     .then((movies) => {
 
-      console.log('movies', movies.results)
       return movies.results
     })
   }
@@ -64,10 +64,10 @@ export function addOMDBratings(movies){
 
   return Promise.all(
     movies.map(async (movie) => {
-      console.log('here!', movie)
       return await getOMDBMovie(movie.title)
-        .then((ratings) => {
-          movie['omdb'] = ratings
+        .then((data) => {
+          movie['omdb'] = data.Ratings
+          movie['imdbID'] = data.imdbID
           return movie
         })
     })
@@ -76,10 +76,10 @@ export function addOMDBratings(movies){
 
 
 function getOMDBMovie(title) {
-  return fetch(`https://omdbapi.com/?apikey=${omdb_key}&t=${title}`)
+  return fetch(`https://omdbapi.com/?apikey=${omdb_key2}&t=${title}`)
     .then((res) => res.json())
     .then((movie) => {
-      return movie.Ratings
+      return movie
     })
 }
 
