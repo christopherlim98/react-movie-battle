@@ -1,9 +1,6 @@
 # react_movie_battle
 Learning to use React, JS, CSS, HTML and APIs
 
-# react_movie_battle
-Learning to use React, JS, CSS, HTML and APIs
-
 ## Learning points
 > Most interesting takeaway
 
