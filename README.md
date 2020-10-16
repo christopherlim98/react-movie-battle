@@ -1,4 +1,8 @@
+
+
 # react_movie_battle
+The demo can be viewed [here](https://vibrant-volhard-03dc6a.netlify.app/ "demo")
+
 Learning to use React, JS, CSS, HTML and APIs
 
 ## Learning points
