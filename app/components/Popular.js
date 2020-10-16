@@ -1,14 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { addOMDBratings, getMoviesByGenre } from '../utils/api'
-import queryString from 'query-string'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
 import Loading from './Loading'
-import { FaStar } from 'react-icons/fa'
 
 
 function GenreNav( {selected, onUpdateGenre}){

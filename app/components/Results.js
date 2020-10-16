@@ -1,6 +1,5 @@
 import React from 'react'
 import {getMovie, getMoviesByGenre } from '../utils/api'
-import queryString from 'query-string'
 
 
 export default class Results extends React.Component{

@@ -1,6 +1,5 @@
 const imdb_key = "k_gJ2dA127"
-const omdb_key = "2e9c7195"
-const omdb_key2 = "2c08432a"
+const omdb_key = "2c08432a"
 const tmdb_key = "32c3e11482c274e139254ddaa1dcadd8"
 
 function getGenres (){
@@ -76,7 +75,7 @@ export function addOMDBratings(movies){
 
 
 function getOMDBMovie(title) {
-  return fetch(`https://omdbapi.com/?apikey=${omdb_key2}&t=${title}`)
+  return fetch(`https://omdbapi.com/?apikey=${omdb_key}&t=${title}`)
     .then((res) => res.json())
     .then((movie) => {
       return movie
